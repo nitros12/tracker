@@ -1,3 +1,5 @@
+# syntax = denzp/cargo-wharf-frontend:latest
+
 [package]
 name = "profile_snoop_thing"
 version = "0.1.0"
@@ -5,6 +7,10 @@ authors = ["Ben Simms <ben@bensimms.moe>"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "tracker"
+path = "src/main.rs"
 
 [dependencies]
 cairo-rs = { version = "0.9.1", default-features = false, features = ["png"] }
@@ -21,3 +27,22 @@ futures-core = "0.3.5"
 futures = "0.3.5"
 pretty_env_logger = "0.4.0"
 pin-project = "0.4.24"
+
+[package.metadata.wharf.builder]
+image = "rust:1.46.0"
+setup-commands = [
+  { shell = "apt-get update && apt-get install -y libcairo2 libcairo2-dev" }
+]
+
+[package.metadata.wharf.output]
+image = "debian:stable-slim"
+pre-install-commands = [
+  { shell = "apt-get update && apt-get install -y libcairo2 libcairo2-dev && rm -rf /var/lib/apt/lists/*" }
+]
+workdir = "/"
+entrypoint = ["/bin/tracker"]
+stop-signal = "SIGINT"
+
+[[package.metadata.wharf.binary]]
+name = "tracker"
+destination = "/bin/tracker"
