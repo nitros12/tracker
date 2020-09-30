@@ -1,0 +1,23 @@
+[package]
+name = "profile_snoop_thing"
+version = "0.1.0"
+authors = ["Ben Simms <ben@bensimms.moe>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cairo-rs = { version = "0.9.1", default-features = false, features = ["png"] }
+piet = { git = "https://github.com/linebender/piet" }
+piet-cairo = { git = "https://github.com/linebender/piet" }
+tokio = { version = "0.2.22", features = ["sync", "time", "stream", "macros", "rt-threaded"] }
+chrono = "0.4.18"
+bytes = "0.5.6"
+warp = "0.2.5"
+image = "0.23.10"
+lazy_static = "1.4.0"
+hyper = "0.13.8"
+futures-core = "0.3.5"
+futures = "0.3.5"
+pretty_env_logger = "0.4.0"
+pin-project = "0.4.24"
