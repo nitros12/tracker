@@ -134,7 +134,7 @@ async fn main() {
     let live_counter = Arc::new(());
     tokio::spawn(renderer(watch_in, live_counter.clone()));
 
-    let time = warp::path!("time").map(move || {
+    let time = warp::path!("time.jpg").map(move || {
         let s = sender
             .subscribe()
             .into_stream()
